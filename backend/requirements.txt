@@ -1,0 +1,8 @@
+# backend/requirements.txt
+fastapi>=0.100.0 # For building the API
+uvicorn[standard]>=0.20.0 # ASGI server to run FastAPI (standard includes websockets and http tools)
+sqlalchemy>=2.0.0 # ORM for database interaction
+psycopg2-binary>=2.9.0 # PostgreSQL adapter for Python
+pydantic[email]>=2.0.0 # For data validation and settings management (email extra for email validation)
+python-dotenv>=0.20.0 # For loading environment variables from a .env file (optional, good for local dev)
+# alembic>=1.9.0 # For database migrations (recommended for production)

@@ -1,0 +1,47 @@
+{
+    "name": "inventory-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "@testing-library/jest-dom": "^5.17.0",
+      "@testing-library/react": "^13.4.0",
+      "@testing-library/user-event": "^13.5.0",
+      "axios": "^1.6.0",  // For making API requests
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-router-dom": "^6.17.0", // For client-side routing
+      "react-scripts": "5.0.1", // From create-react-app, adjust if using Vite or other bundler
+      "web-vitals": "^2.1.4",
+      "tailwindcss": "^3.3.5", // For styling (optional, but common)
+      "lucide-react": "^0.309.0" // For icons (optional)
+    },
+    "scripts": {
+      "start": "react-scripts start", // Development server
+      "build": "react-scripts build", // Production build
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "react-app/jest"
+      ]
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "devDependencies": {
+      "autoprefixer": "^10.4.16", // For Tailwind CSS
+      "postcss": "^8.4.31"      // For Tailwind CSS
+    }
+  }
+  

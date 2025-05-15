@@ -1,0 +1,51 @@
+version: '3.8' # Specifies the Docker Compose file format version
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: ./backend # Specifies the build context for the backend Dockerfile
+      dockerfile: Dockerfile
+    container_name: inventory_backend
+    ports:
+      - "8000:8000" # Maps port 8000 of the host to port 8000 of the container
+    volumes:
+      - ./backend:/app # Mounts the ./backend directory on the host to /app in the container for development
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/inventory_db # Database connection string
+      - SECRET_KEY=your_very_secret_key_here # Secret key for the application
+      - DEBUG=True # Enables debug mode (set to False in production)
+    depends_on:
+      - db # Specifies that the backend service depends on the db service
+    restart: unless-stopped # Configures the restart policy
+
+  # Frontend Web UI Service
+  frontend:
+    build:
+      context: ./frontend # Specifies the build context for the frontend Dockerfile
+      dockerfile: Dockerfile
+    container_name: inventory_frontend
+    ports:
+      - "3000:3000" # Maps port 3000 of the host to port 3000 of the container (assuming a Node.js based frontend)
+    volumes:
+      - ./frontend/src:/app/src # Mounts the ./frontend/src directory for live reloading during development
+    depends_on:
+      - backend # Specifies that the frontend service depends on the backend service
+    restart: unless-stopped
+
+  # PostgreSQL Database Service
+  db:
+    image: postgres:15-alpine # Uses the official PostgreSQL 15 Alpine image
+    container_name: inventory_postgres_db
+    ports:
+      - "5432:5432" # Maps port 5432 of the host to port 5432 of the container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persists database data using a named volume
+    environment:
+      - POSTGRES_USER=user # Sets the PostgreSQL username
+      - POSTGRES_PASSWORD=password # Sets the PostgreSQL password
+      - POSTGRES_DB=inventory_db # Sets the PostgreSQL database name
+    restart: unless-stopped
+
+volumes:
+  postgres_data: # Defines the named volume for persistent database storage
